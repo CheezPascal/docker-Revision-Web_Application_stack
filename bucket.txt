@@ -25,12 +25,6 @@ docker container run -d \
   -v nginx_html:/usr/share/nginx/html \
   nginx:latest
 
-# Copy index.html into the Nginx volume
-docker container run --rm \
-  -v nginx_html:/usr/share/nginx/html \
-  -v $(pwd)/index.html:/tmp/index.html \
-  busybox sh -c "cp /tmp/index.html /usr/share/nginx/html/index.html"
-
 # Run Node.js container
 docker container run -d \
   --name node_app \
@@ -39,6 +33,10 @@ docker container run -d \
   -v $(pwd)/app:/usr/src/app \
   -w /usr/src/app \
   node:latest npm start
+
+# Copy sample HTML file into the Nginx volume
+echo "<h1>Hello, Docker!</h1>" | docker container run --rm -i \
+  -v nginx_html:/usr/share/nginx/html busybox sh -c "cat > /usr/share/nginx/html/index.html"
 
 # Verify running containers
 docker ps
