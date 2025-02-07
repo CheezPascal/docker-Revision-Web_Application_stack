@@ -38,7 +38,8 @@ docker container run -d \
   -p 3000:3000 \
   -v $(pwd)/app:/usr/src/app \
   -w /usr/src/app \
-  node:latest npm start
+  node:latest sh -c "npm install && npm start"
+
 
 # Verify running containers
 docker ps
