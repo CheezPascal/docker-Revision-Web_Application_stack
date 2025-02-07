@@ -52,3 +52,6 @@ sleep 0.5
 echo "Bloat removed"
 echo "## $(printf ' %.0s' {1..74}) ##"
 echo "$(printf '#%.0s' {1..80})"
+
+wait 1
+clear
