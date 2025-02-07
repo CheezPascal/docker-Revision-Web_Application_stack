@@ -21,7 +21,7 @@ docker container run -d \
 docker container run -d \
   --name nginx_server \
   --network my_network \
-  -p 8080:80 \                                                    # Use any port you like ------------
+  -p 8090:80 \                                                    # Use any port you like ------------
   -v nginx_html:/usr/share/nginx/html \
   nginx:latest
 
