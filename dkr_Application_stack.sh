@@ -21,7 +21,7 @@ docker container run -d \
 docker container run -d \
   --name nginx_server \
   --network my_network \
-  -p 8080:80 \
+  -p 8080:80 \                                                    # Use any port you like ------------
   -v nginx_html:/usr/share/nginx/html \
   nginx:latest
 
@@ -29,7 +29,7 @@ docker container run -d \
 docker container run --rm \
   -v nginx_html:/usr/share/nginx/html \
   -v $(pwd)/index.html:/tmp/index.html \
-  busybox sh -c "cp /tmp/index.html /usr/share/nginx/html/index.html"
+  busybox sh -c "cp /tmp/index.html /usr/share/nginx/html/index.html" # Update this -----------
 
 # Run Node.js container
 docker container run -d \
