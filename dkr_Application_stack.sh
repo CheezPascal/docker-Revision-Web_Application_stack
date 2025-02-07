@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Create a Docker network
-docker network create my_network
+docker network create stack_network_A
 
 # Create a volume for the Nginx web files
 docker volume create nginx_html
@@ -9,7 +9,7 @@ docker volume create nginx_html
 # Run MySQL container
 docker container run -d \
   --name mysql_db \
-  --network my_network \
+  --network stack_network_A \
   -e MYSQL_ROOT_PASSWORD=rootpassword \
   -e MYSQL_DATABASE=mydatabase \
   -e MYSQL_USER=myuser \
@@ -20,8 +20,8 @@ docker container run -d \
 # Run Nginx container with volume for static HTML
 docker container run -d \
   --name nginx_server \
-  --network my_network \
-  -p 8090:80 \                                                    # Use any port you like ------------
+  --network stack_network_A \
+  -p 8090:80 \
   -v nginx_html:/usr/share/nginx/html \
   nginx:latest
 
@@ -34,7 +34,7 @@ docker container run --rm \
 # Run Node.js container
 docker container run -d \
   --name node_app \
-  --network my_network \
+  --network stack_network_A \
   -p 3000:3000 \
   -v $(pwd)/app:/usr/src/app \
   -w /usr/src/app \
